@@ -1,13 +1,14 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Business.Concrete
 {
-    public class CarManager : ICarService
+    public class CarManager : IBaseService<Car>,ICarService
     {
         ICarDal _CarDal;
 
@@ -16,11 +17,11 @@ namespace Business.Concrete
             _CarDal = carDal;
         }
 
-        public void Add(Car car)
+        public void Add(Car entity)
         {
-            if (car.CarName.Length > 2 && car.DailyPrice > 0)
+            if (entity.CarName.Length > 2 && entity.DailyPrice > 0)
             {
-                _CarDal.Add(car);
+                _CarDal.Add(entity);
                 Console.WriteLine("Bilgileriniz başarıyla eklendi.");
             }
             else
@@ -29,19 +30,37 @@ namespace Business.Concrete
             }
         }
 
+        public void Delete(Car entity)
+        {
+        }
+
         public List<Car> GetAll()
         {
             return _CarDal.GetAll();
         }
 
+        public Car GetById(int id)
+        {
+            return _CarDal.Get(c=> c.Id == id);
+        }
+
+        public List<CarDetailDto> GetCarDetailDtos()
+        {
+            return _CarDal.GetCarDetails();
+        }
+
         public List<Car> GetCarsByBrandId(int id)
         {
-            return _CarDal.GetAll(c=>c.BrandId==id);
+            return _CarDal.GetAll(c=> c.BrandId==id);
         }
 
         public List<Car> GetCarsByColorId(int id)
         {
-            return _CarDal.GetAll(c=>c.ColorId==id);
+            return _CarDal.GetAll(c=> c.ColorId==id);
+        }
+
+        public void Update(Car entity)
+        {
         }
     }
 }
