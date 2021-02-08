@@ -17,12 +17,14 @@ namespace Business.Concrete
 
         public void Add(Brand entity)
         {
-
+            _brandDal.Add(entity);
+            Console.WriteLine("Bilgileriniz başarıyla eklendi.");
         }
 
         public void Delete(Brand entity)
         {
-            
+            _brandDal.Delete(entity);
+            Console.WriteLine("Bilgileriniz başarıyla silindi.");
         }
 
         public List<Brand> GetAll()
@@ -37,7 +39,8 @@ namespace Business.Concrete
 
         public void Update(Brand entity)
         {
-            
+            _brandDal.Update(entity);
+            Console.WriteLine("Bilgileriniz guncellendi.");
         }
     }
 }

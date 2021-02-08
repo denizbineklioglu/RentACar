@@ -18,10 +18,15 @@ namespace Business.Concrete
 
         public void Add(Color entity)
         {
+            _colorDal.Add(entity);
+            Console.WriteLine("Bilgileriniz başarıyla eklendi");
         }
 
         public void Delete(Color entity)
         {
+            _colorDal.Delete(entity);
+            Console.WriteLine("Bilgileriniz başarıyla silindi.");
+
         }
 
         public List<Color> GetAll()
@@ -36,6 +41,8 @@ namespace Business.Concrete
 
         public void Update(Color entity)
         {
+            _colorDal.Update(entity);
+            Console.WriteLine("Bilgileriniz güncellendi.");
         }
     }
 }

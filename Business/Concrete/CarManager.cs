@@ -11,7 +11,6 @@ namespace Business.Concrete
     public class CarManager : IBaseService<Car>,ICarService
     {
         ICarDal _CarDal;
-
         public CarManager(ICarDal carDal)
         {
             _CarDal = carDal;
@@ -32,6 +31,8 @@ namespace Business.Concrete
 
         public void Delete(Car entity)
         {
+            _CarDal.Delete(entity);
+            Console.WriteLine("Bilgileriniz silindi.");
         }
 
         public List<Car> GetAll()
@@ -42,8 +43,7 @@ namespace Business.Concrete
         public Car GetById(int id)
         {
             return _CarDal.Get(c=> c.Id == id);
-        }
-
+        }     
         public List<CarDetailDto> GetCarDetailDtos()
         {
             return _CarDal.GetCarDetails();
@@ -61,6 +61,8 @@ namespace Business.Concrete
 
         public void Update(Car entity)
         {
+            _CarDal.Update(entity);
+            Console.WriteLine("Bilgileriniz basariyla guncellendi.");
         }
     }
 }
