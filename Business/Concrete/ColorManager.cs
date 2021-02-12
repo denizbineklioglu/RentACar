@@ -33,7 +33,7 @@ namespace Business.Concrete
         }
         public IDataResult<Color> GetById(int id)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(c=> c.Id== id),Messages.Listed);
+            return new SuccessDataResult<Color>(_colorDal.Get(c=> c.ColorID== id),Messages.Listed);
         }
         public IResult Update(Color entity)
         {
