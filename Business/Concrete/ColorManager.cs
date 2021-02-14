@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class ColorManager : IBaseService<Color>
+    public class ColorManager : IColorService
     {
         IColorDal _colorDal;
 
