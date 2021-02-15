@@ -12,13 +12,12 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            var result = rentalManager.Add(new Rental
-            {
-                CarID = 3,
-                CustomerID = 5,
-                RentDate = DateTime.Now
+            rentalManager.Add(new Rental { 
+              CarID=3,
+              CustomerID=3,
+              RentDate= new DateTime(2021,2,12)
             });
-            Console.WriteLine(result.Message);
+
         }
         private static void BrandTest()
         {

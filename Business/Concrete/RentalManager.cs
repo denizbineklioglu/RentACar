@@ -21,11 +21,14 @@ namespace Business.Concrete
         {
             if (entity.ReturnDate==null)
             {
-                return new ErrorResult(Messages.Added);
+                return new ErrorResult(Messages.CarInvalid);
             }
-
-            _rentalDal.Add(entity);
-            return new SuccessResult(Messages.Added);
+            else
+            {
+                _rentalDal.Add(entity);
+                return new SuccessResult(Messages.Added);
+            }
+            
         }
 
         public IResult Delete(Rental entity)
