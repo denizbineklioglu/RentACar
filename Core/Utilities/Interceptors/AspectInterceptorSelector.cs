@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Core.Utilities.Interceptors
 {
-    public class AspectInterceptorSelector
+    public class AspectInterceptorSelector : IInterceptorSelector
     {
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {
