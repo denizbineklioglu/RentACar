@@ -13,14 +13,14 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarImagesController : ControllerBase
     {
-        ICarImagesService _carImagesService;
-        public CarImagesController(ICarImagesService carImagesService)
+        ICarImageService _carImagesService;
+        public CarImagesController(ICarImageService carImagesService)
         {
             _carImagesService = carImagesService;
         }
 
         [HttpPost("add")]
-        public IActionResult Add(CarImages carImages)
+        public IActionResult Add(CarImage carImages)
         {
             var result = _carImagesService.Add(carImages);
             if (result.Success)
@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(CarImages carImages)
+        public IActionResult Delete(CarImage carImages)
         {
             var result = _carImagesService.Delete(carImages);
             if (result.Success)
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
             return BadRequest();
         }
         [HttpPost("update")]
-        public IActionResult Update(CarImages carImages)
+        public IActionResult Update(CarImage carImages)
         {
             var result = _carImagesService.Update(carImages);
             if (result.Success)

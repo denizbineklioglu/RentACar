@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class CarImages :IEntity
+    public class CarImage :IEntity
     {
-        public int CarImagesID { get; set; }
+        public int CarImageID { get; set; }
         public int CarID { get; set; }
         public string ImagePath { get; set; }
         public DateTime Date { get; set; }
