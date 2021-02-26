@@ -12,6 +12,6 @@ namespace Business.Constants
         public static string Deleted = "Silindi.";
         public static string Updated = "Guncellendi.";
         public static string CarInvalid = "Araba şuan başka müşterimizde olduğu için kiralama işlemi gerçekleştirilemedi.";
-        internal static string CarPicturesLimitExceed="Arabaya eklenecek fotoğraf sayısı aşıldı!";
+        public static string CarPicturesLimitExceed="Arabaya 5'ten fazla fotoğraf eklenemez!";
     }
 }

@@ -20,11 +20,11 @@ namespace WebAPI.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
         [HttpPost]
-        public string Add([FromForm]FileUpload objectFile)
+        public string Add([FromForm] FileUpload objectFile)
         {
             try
             {
-                if (objectFile.files.Length>0)
+                if (objectFile.files.Length > 0)
                 {
                     string guid = Guid.NewGuid().ToString("N") + "_" + DateTime.Now.Month +
                         "_" + DateTime.Now.Day + "_" + DateTime.Now.Year;
@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
                         fileStream.Flush();
                         return "Uploaded";
                     }
-                }
+                }               
                 else
                 {
                     return "Not Uploaded";

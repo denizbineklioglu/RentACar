@@ -25,9 +25,9 @@ namespace WebAPI.Controllers
             var result = _carImagesService.Add(carImages);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpPost("delete")]
@@ -36,9 +36,9 @@ namespace WebAPI.Controllers
             var result = _carImagesService.Delete(carImages);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
         [HttpPost("update")]
         public IActionResult Update(CarImage carImages)
@@ -46,9 +46,9 @@ namespace WebAPI.Controllers
             var result = _carImagesService.Update(carImages);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
 
         [HttpGet("getall")]
@@ -57,9 +57,9 @@ namespace WebAPI.Controllers
             var result = _carImagesService.GetAll();
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
     }
 }
