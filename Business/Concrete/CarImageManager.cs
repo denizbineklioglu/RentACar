@@ -7,6 +7,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Business.Concrete
 {
@@ -22,7 +23,11 @@ namespace Business.Concrete
 
         public IResult Add(CarImage carImages)
         {
-            BusinessRules.Run(CheckCountPicturesOfCar(carImages.CarID));
+            var result = BusinessRules.Run(CheckCountPicturesOfCar(carImages.CarID));
+            if (result.Success)
+            {
+                return result;
+            }
             _carImageDal.Add(carImages);
             return new SuccessResult();
         }
@@ -49,14 +54,17 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckCountPicturesOfCar(int carid)
+        private IResult CheckCountPicturesOfCar(int carID)
         {
-            var result = _carImageDal.GetAll(c=> c.CarID == carid).Count;
+            var result = _carImageDal.GetAll(c=> c.CarID == carID).Count;
             if (result > 5)
             {
-                return new ErrorResult(Messages.CarPicturesLimitExceed);
+              return new ErrorResult(Messages.CarPicturesLimitExceed);
             }
             return new SuccessResult();
         }
+
+
+
     }
 }
