@@ -26,6 +26,13 @@ namespace Business.Concrete
             _carDal.Add(entity);
             return new SuccessResult(Messages.Added);
         }
+
+        public IResult AddImage(Car car)
+        {
+            
+            throw new NotImplementedException();
+        }
+
         public IResult Delete(Car entity)
         {
             _carDal.Delete(entity);

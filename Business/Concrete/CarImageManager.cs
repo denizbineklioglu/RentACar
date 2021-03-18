@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using Microsoft.AspNetCore.Http;
+using Core.Utilities.Helpers;
 
 namespace Business.Concrete
 {
@@ -21,19 +23,17 @@ namespace Business.Concrete
             _carService = carService;
         }
 
-        public IResult Add(CarImage carImages)
+        public IResult Add(IFormFile file,CarImage carImages)
         {
-            var result = BusinessRules.Run(CheckCountPicturesOfCar(carImages.CarID));
-            if (result != null)
-            {
-                return result;
-            }
+            carImages.ImagePath = FileHelper.Add(file);
+            carImages.Date = DateTime.Now;
             _carImageDal.Add(carImages);
             return new SuccessResult();
         }
 
         public IResult Delete(CarImage carImage)
         {
+            FileHelper.Delete(carImage.ImagePath);
             _carImageDal.Delete(carImage);
             return new SuccessResult();
         }
@@ -48,8 +48,15 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c=> c.CarImageID == id));
         }
 
-        public IResult Update(CarImage carImage)
+        public IDataResult<List<CarImage>> GetCarImageByCarId(int carId)
         {
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarID == carId));
+        }
+
+        public IResult Update(IFormFile file,CarImage carImage)
+        {
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(c => c.CarImageID == carImage.CarImageID).ImagePath, file);
+            carImage.Date = DateTime.Now;
             _carImageDal.Update(carImage);
             return new SuccessResult();
         }

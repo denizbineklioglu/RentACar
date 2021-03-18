@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Helpers;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +22,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(CarImage carImages)
+        public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImages)
         {
-            var result = _carImagesService.Add(carImages);
+            var result = _carImagesService.Add(file,carImages);
             if (result.Success)
             {
                 return Ok(result);
@@ -30,23 +32,29 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(CarImage carImages)
+        public IActionResult Delete([FromForm] int id)
         {
-            var result = _carImagesService.Delete(carImages);
+            var carImage = _carImagesService.GetById(id).Data;
+            var result = _carImagesService.Delete(carImage);
+
             if (result.Success)
             {
                 return Ok(result);
             }
+
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update(CarImage carImages)
+        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm] int id)
         {
-            var result = _carImagesService.Update(carImages);
+            var carImage = _carImagesService.GetById(id).Data;
+            var result = _carImagesService.Update(file, carImage);
+
             if (result.Success)
             {
                 return Ok(result);
             }
+
             return BadRequest(result);
         }
 
@@ -59,6 +67,17 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpGet("getcarimage")]
+        public IActionResult GetCarImageByCarId(int id)
+        {
+            var result = _carImagesService.GetCarImageByCarId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
         }
     }
 }
