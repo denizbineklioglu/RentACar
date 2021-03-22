@@ -8,6 +8,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -23,7 +24,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental entity)
         {
-            if (entity.ReturnDate==null)
+            var result = _rentalDal.GetAll(r => r.CarID == entity.CarID && (r.ReturnDate == null || r.ReturnDate > entity.RentDate)).Any();
+            if (result)
             {
                 return new ErrorResult(Messages.CarInvalid);
             }
