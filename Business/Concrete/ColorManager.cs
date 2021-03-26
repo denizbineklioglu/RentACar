@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -20,12 +21,15 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color entity)
         {
             _colorDal.Add(entity);
             return new SuccessResult(Messages.Added);
         }
+
+        [SecuredOperation("admin")]
         public IResult Delete(Color entity)
         {
             _colorDal.Delete(entity);
@@ -39,6 +43,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Color>(_colorDal.Get(c=> c.ColorID== id),Messages.Listed);
         }
+
+        [SecuredOperation("admin")]
         public IResult Update(Color entity)
         {
             _colorDal.Update(entity);

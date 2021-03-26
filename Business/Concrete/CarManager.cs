@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -19,7 +20,7 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car entity)
         {
@@ -33,6 +34,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        [SecuredOperation("admin")]
         public IResult Delete(Car entity)
         {
             _carDal.Delete(entity);
@@ -83,6 +85,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=> c.ColorID==id),Messages.Listed);
         }
 
+        [SecuredOperation("admin")]
         public IResult Update(Car entity)
         {
             _carDal.Update(entity);

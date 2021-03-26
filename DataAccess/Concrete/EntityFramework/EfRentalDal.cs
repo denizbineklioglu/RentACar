@@ -22,10 +22,10 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandID equals b.BrandID
                              join co in context.COLORS
                              on c.ColorID equals co.ColorID
-                             join cu in context.CUSTOMERS
+                             join cu in context.Customers
                              on r.CustomerID equals cu.CustomerID
                              join u in context.Users
-                             on cu.UserID equals u.UserID
+                             on cu.UserID equals u.UserId
                              select new RentalDetailDtos
                              {
                                  RentalId = r.RentalID,

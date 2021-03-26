@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -18,13 +19,15 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
-
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand entity)
         {
             _brandDal.Add(entity);
             return new SuccessResult(Messages.Added);
         }
+
+        [SecuredOperation("admin")]
         public IResult Delete(Brand entity)
         {
             _brandDal.Delete(entity);
@@ -38,6 +41,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Brand>(_brandDal.Get(b=> b.BrandID == id),Messages.Listed);
         }
+
+        [SecuredOperation("admin")]
         public IResult Update(Brand entity)
         {
             _brandDal.Update(entity);

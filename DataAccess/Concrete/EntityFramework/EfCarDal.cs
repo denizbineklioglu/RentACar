@@ -33,7 +33,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  BrandName = b.BrandName,
                                  DailyPrice = c.DailyPrice,
                                  ModelYear = c.ModelYear,
-                                 ImagePath = cm.ImagePath
+                                 ImagePath = cm.ImagePath,
+                                 FindeksPoint  = c.FindeksPoint
                              };
                 return result.ToList();
             }
