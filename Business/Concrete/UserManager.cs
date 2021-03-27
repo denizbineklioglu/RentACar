@@ -24,6 +24,17 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Added);
         }
 
+        public IResult Delete(User user)
+        {
+            _userDal.Delete(user);
+            return new SuccessResult(Messages.Deleted);
+        }
+
+        public IDataResult<User> GetById(int id)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == id));
+        }
+
         public IDataResult<User> GetByMail(string email)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
@@ -32,6 +43,12 @@ namespace Business.Concrete
         public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
             return new SuccessDataResult<List<OperationClaim>>( _userDal.GetClaims(user));
+        }
+
+        public IResult Update(User user)
+        {
+            _userDal.Update(user);
+            return new SuccessResult(Messages.Updated);
         }
     }
 }
