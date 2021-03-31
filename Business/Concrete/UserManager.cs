@@ -50,5 +50,15 @@ namespace Business.Concrete
             _userDal.Update(user);
             return new SuccessResult(Messages.Updated);
         }
+
+        public IResult UpdateUser(User user)
+        {
+            var userToUpdate = GetById(user.UserId).Data;
+            userToUpdate.FirstName = user.FirstName;
+            userToUpdate.LastName = user.LastName;
+            userToUpdate.Email = user.Email;
+            Update(userToUpdate);
+            return new SuccessResult(Messages.ProfileUpdate);
+        }
     }
 }

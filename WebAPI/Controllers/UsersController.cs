@@ -53,6 +53,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost("userUpdate")]
+        public IActionResult UserUpdate(User user)
+        {
+            var result = _userService.UpdateUser(user);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
 
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)

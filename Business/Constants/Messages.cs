@@ -22,5 +22,7 @@ namespace Business.Constants
         public static string Registered="Kayıt olundu";
         public static string UserEntered="Kullanıcı girildi.";
         public static string AuthorizationDenied="Yetkiniz yok.";
+        public static string PasswordChanged = "Şifre başarıyla değiştirildi";
+        public static string ProfileUpdate = "Profil Guncellendi";
     }
 }
